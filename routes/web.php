@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/sobre-nos', function() { return 'Emily e Liliane'; });
+Route::get('/login', function() { return 'Login'; })->name('site.login');
+
+Route::prefix('/app')->group(function() {
+    Route::get('/alunos', function() { return 'Alunos'; });
+    Route::get('/passivo', function() { return 'Passivo'; });
+});
