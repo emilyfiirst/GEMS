@@ -9,13 +9,15 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Garante que o conteúdo cubra a altura da tela */
         }
         header {
             background-color: #003366; 
             color: white;
             padding: 20px;
             text-align: center;
-            position: relative;
         }
         header img {
             height: 50px;
@@ -26,10 +28,16 @@
             margin-left: 10px;
             vertical-align: middle;
         }
+        label {
+            font-weight: bold;
+            text-align: left;
+        }
+
         .content {
             background-color: #e6f3ff;
             padding: 20px;
             text-align: center;
+            flex-grow: 1; /* Faz com que a coluna de conteúdo ocupe o espaço restante */
         }
         .bold {
             font-weight: bold;
@@ -39,9 +47,6 @@
             color: white;
             padding: 10px;
             text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
         }
         .login-form {
             margin: 0 auto;
@@ -53,6 +58,8 @@
         }
         .form-group {
             margin-bottom: 20px;
+            width: 80%; 
+            margin: 0 auto; 
         }
         .form-group label {
             display: block;
@@ -65,16 +72,23 @@
             border-radius: 5px;
         }
         .form-group button {
-            width: 100%;
+            width: 80%; 
+            margin: 0 auto; 
             padding: 10px;
             background-color: #003366;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px; 
         }
         .form-group button:hover {
             background-color: #002244;
+        }
+
+        div button {
+            font-size: 17px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -87,13 +101,13 @@
     <div class="content">
         <div class="login-form">
             <h2>Login</h2>
-                @csrf
+            <form action="#" method="POST"> <!-- Altere o action e o method conforme necessário -->
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Senha:</label>
+                    <label for="password">Senha</label>
                     <input type="password" id="password" name="password" required>
                 </div>
                 <div class="form-group">

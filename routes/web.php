@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
-Route::get('/sobre-nos', [SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
+Route::get('/sobre', [SobreNosController::class, 'sobre'])->name('site.sobreNos');
 Route::post('/login', [LoginController::class, 'login'])->name('site.login');
 
 
