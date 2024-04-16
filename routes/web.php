@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrincipalController;
-use App\Http\Controllers\SobreNosController;
+use App\Http\Controllers\SobreController;
 use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +20,8 @@ Route::get('/', function () {
 });
 
 Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
-Route::get('/sobre', [SobreNosController::class, 'sobre'])->name('site.sobreNos');
-Route::post('/login', [LoginController::class, 'login'])->name('site.login');
+Route::get('/sobre', [SobreController::class, 'sobre'])->name('site.sobre');
+Route::get('/login', [LoginController::class, 'login'])->name('site.login');
 
 
 Route::prefix('/app')->group(function() {

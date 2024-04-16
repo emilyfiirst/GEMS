@@ -11,7 +11,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Garante que o conteúdo cubra a altura da tela */
+            min-height: 100vh; 
         }
         header {
             background-color: #003366; 
@@ -101,7 +101,7 @@
     <div class="content">
         <div class="login-form">
             <h2>Login</h2>
-            <form action="#" method="POST"> <!-- Altere o action e o method conforme necessário -->
+            <form action="#"> 
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>

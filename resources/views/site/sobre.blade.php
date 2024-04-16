@@ -60,6 +60,25 @@
         .login-button:hover {
             background-color: #45a049;
         }
+         .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .card {
+            width: 300px;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .card img {
+            width: 100px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -68,10 +87,23 @@
         <h1>GEMS</h1>
         <button class="login-button" onclick="window.location.href='{{ route('site.login') }}'">Login</button>
     </header>
+    <h1 style="text-align: center;">Sobre Nós</h1>
 
-    <div class="content">
-        <p><span class="bold">Emily Fiirst</span> e <span class="bold">Liliane Shimizo</span> - Estudantes de Sistemas de Informação e desenvolvedoras do projeto GEMS</p>
-    </div>
+    <div class="card-container">
+            
+            <div class="card">
+                <img src="{{ asset('images/emily.jpeg') }}" alt="Desenvolvedor 1">
+                <h2><span class="bold">Emily Fiirst</span></h2>
+                <p>Estudante de Sistemas de Informação e desenvolvedora do projeto GEMS</p>
+            </div>
+
+            
+            <div class="card">
+                <img src="{{ asset('images/liliane.jpeg') }}" alt="Desenvolvedor 2">
+                <h2><span class="bold">Liliane Shimizo</span></h2>
+                <p>Estudante de Sistemas de Informação e desenvolvedora do projeto GEMS</p>
+            </div>
+        </div>
 
     <footer>
         <p>© 2024 GEMS. Todos os direitos reservados.</p>
