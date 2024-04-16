@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\SobreNosController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +18,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/sobre-nos', function() { return 'Emily e Liliane'; });
-Route::get('/login', function() { return 'Login'; })->name('site.login');
+
+Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
+Route::get('/sobre-nos', [SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
+Route::post('/login', [LoginController::class, 'login'])->name('site.login');
+
 
 Route::prefix('/app')->group(function() {
-    Route::get('/alunos', function() { return 'Alunos'; });
-    Route::get('/passivo', function() { return 'Passivo'; });
+    Route::get('/alunos', function() { return 'Alunos'; })->name('app.alunos');
+    Route::get('/passivo', function() { return 'Passivo'; })->name('app.passivo') ;
+});
+
+Route::fallback(function() {
+    echo 'A rota acessada não existe. <a href="'.route('site.index').'">clique aqui</a> para ir para página inicial';
 });
