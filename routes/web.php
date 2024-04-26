@@ -4,29 +4,24 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreController;
 use App\Http\Controllers\LoginController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\AlunosController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('site.index');
 
-Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
 Route::get('/sobre', [SobreController::class, 'sobre'])->name('site.sobre');
-Route::get('/login', [LoginController::class, 'login'])->name('site.login');
+
+// Rota para exibir o formulário de login
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('site.login');
+
+// Rota para processar o envio do formulário de login
+Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('auth');
 
 
-Route::prefix('/app')->group(function() {
-    Route::get('/alunos', function() { return 'Alunos'; })->name('app.alunos');
-    Route::get('/passivo', function() { return 'Passivo'; })->name('app.passivo') ;
+Route::middleware('auth')->prefix('/app')->group(function() {
+    Route::get('/alunos', [AlunosController::class, 'alunos'])->name('app.alunos');
+    Route::get('/passivo', function() { return 'Passivo'; })->name('app.passivo');
 });
 
 Route::fallback(function() {

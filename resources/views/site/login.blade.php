@@ -96,15 +96,20 @@
     <header>
         <img src="{{ asset('images/logo.png') }}" alt="Logo">
         <h1>GEMS</h1>
+        <!-- Exibir mensagem de boas-vindas se o usuário estiver autenticado -->
+        @auth
+            <p>Bem-vindo, {{ Auth::user()->name }}!</p>
+        @endauth
     </header>
 
     <div class="content">
         <div class="login-form">
             <h2>Login</h2>
-            <form action="#"> 
+            <form action="{{ route('login') }}" method="POST">
+            @csrf 
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="username">Nome de Usuário</label>
+                    <input type="text" id="username" name="username" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
@@ -114,6 +119,8 @@
                     <button type="submit">Entrar</button>
                 </div>
             </form>
+
+
         </div>
     </div>
 
