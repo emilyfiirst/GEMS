@@ -48,6 +48,22 @@
             padding: 10px;
             text-align: center;
         }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
         .login-form {
             margin: 0 auto;
             width: 300px;
@@ -96,30 +112,34 @@
     <header>
         <img src="{{ asset('images/logo.png') }}" alt="Logo">
         <h1>GEMS</h1>
-        <!-- Exibir mensagem de boas-vindas se o usuário estiver autenticado -->
-        @auth
-            <p>Bem-vindo, {{ Auth::user()->name }}!</p>
-        @endauth
+    <nav>
+        <ul>
+            <li><a href="{{ route('site.sobre') }}">Sobre nos</a></li>
+        
+        </ul>
+    </nav>
     </header>
 
     <div class="content">
         <div class="login-form">
             <h2>Login</h2>
-            <form action="{{ route('login') }}" method="POST">
+            <form action="{{ route('site.login') }}" method="POST">
             @csrf 
                 <div class="form-group">
                     <label for="username">Nome de Usuário</label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" value="{{ old('username') }}" id="username" name="username">
+                    {{ $errors->has('username') ? $errors->first('username') : ''}}                
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" value="{{ old('password') }}"" id="password" name="password">
+                    {{ $errors->has('password') ? $errors->first('password') : ''}}    
                 </div>
                 <div class="form-group">
                     <button type="submit">Entrar</button>
                 </div>
             </form>
-
+            {{ isset($erro) && $erro != '' ? $erro : '' }}
 
         </div>
     </div>
