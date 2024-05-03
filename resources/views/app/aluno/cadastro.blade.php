@@ -110,13 +110,13 @@
                 </div>
                 <div class="form-group">
                     <label>Documentos:</label><br>
-                    <label><input type="checkbox" name="documentos[]" value="certidao_nascimento"> Certidão de Nascimento</label><br>
-                    <label><input type="checkbox" name="documentos[]" value="historico"> Histórico</label><br>
-                    <label><input type="checkbox" name="documentos[]" value="cartao_sus"> Cartão SUS</label><br>
-                    <label><input type="checkbox" name="documentos[]" value="doc_responsavel"> Documento do Responsável</label><br>
-                    <label><input type="checkbox" name="documentos[]" value="comp_endereco"> Comprovante de Endereço</label><br>
-                    <label><input type="checkbox" name="documentos[]" value="doador_medula"> Doador de Medula</label><br>
-                    <label><input type="checkbox" name="documentos[]" value="doador_sangue"> Doador de Sangue</label><br>
+                    <label><input type="checkbox" name="certidao_nascimento" value="1"> Certidão de Nascimento</label><br>
+                    <label><input type="checkbox" name="historico" value="1"> Histórico</label><br>
+                    <label><input type="checkbox" name="cartao_sus" value="1"> Cartão SUS</label><br>
+                    <label><input type="checkbox" name="doc_responsavel" value="1"> Documento do Responsável</label><br>
+                    <label><input type="checkbox" name="comp_endereco" value="1"> Comprovante de Endereço</label><br>
+                    <label><input type="checkbox" name="doador_medula" value="1"> Doador de Medula</label><br>
+                    <label><input type="checkbox" name="doador_sangue" value="1"> Doador de Sangue</label><br>
                 </div>
    
                 <div class="form-group">
