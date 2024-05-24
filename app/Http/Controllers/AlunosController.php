@@ -13,7 +13,7 @@ class AlunosController extends Controller
 
     public function listar(Request $request){
         $alunos = Aluno::where('nome', 'like', '%'.$request->input('nome').'%')
-        ->where('cod_sgde', 'like', '%'.$request->input('cod_sgde').'%')
+        ->where('id', 'like', '%'.$request->input('id').'%')
         ->where('data_nascimento', 'like', '%'.$request->input('data_nascimento').'%')
         ->where('ativo', 'like', '%'.$request->input('ativo').'%')
         ->where('numero_pasta', 'like', '%'.$request->input('numero_pasta').'%')
@@ -33,7 +33,6 @@ class AlunosController extends Controller
         if($request->input('_token') != '') {
             $regras = [
                 'nome' => 'required|min:3|max:100',
-                'cod_sgde' => 'required',
                 'data_nascimento' => 'required',
                 'numero_pasta' => 'required',
             ];
