@@ -30,6 +30,19 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     Route::post('/aluno/listar', [AlunosController::class, 'listar'])->name('app.aluno.listar');
     Route::get('/aluno/cadastro', [AlunosController::class, 'cadastrar'])->name('app.aluno.cadastro');
     Route::post('/aluno/cadastro', [AlunosController::class, 'cadastrar'])->name('app.aluno.cadastro');
+    Route::get('/aluno/editar/{id}', [AlunosController::class, 'editar'])->name('app.aluno.editar');
+    Route::post('/aluno/editar/{id}', [AlunosController::class, 'editar'])->name('app.aluno.editar');
+    Route::put('/aluno/editar/{id}', [AlunosController::class, 'editar'])->name('app.aluno.editar');
+
+
+
+    Route::post('/passivo/listar', [PassivoController::class, 'listar'])->name('app.passivo.listar');
+    Route::get('/passivo/cadastro', [PassivoController::class, 'cadastrar'])->name('app.passivo.cadastro');
+    Route::post('/passivo/cadastro', [PassivoController::class, 'cadastrar'])->name('app.passivo.cadastro');
+    Route::get('/passivo/editar/{id}', [PassivoCOntroller::class, 'editar'])->name('app.passivo.editar');
+    Route::post('/passivo/editar/{id}', [PassivoController::class, 'editar'])->name('app.passivo.editar');
+
+
 
 });
 

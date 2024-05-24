@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisar Aluno</title>
+    <title>Pesquisa de Passivo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
             text-align: center;
         }
 
-        .menu {
+         .menu {
         background-color: #e6f3ff;
         text-align: center;
         padding: 10px;
@@ -46,7 +46,7 @@
             color: #003366;
             font-weight: bold;
         }
-
+        
         .content {
             flex-grow: 1;
             background-color: #f0f0f0;
@@ -112,26 +112,18 @@
 
     <div class="menu">
         <ul>
-            <li><a href="{{ route('app.aluno.cadastro') }}">Cadastrar</a></li>
+            <li><a href="{{ route('app.passivo.cadastro') }}">Cadastrar</a></li>
         </ul>
     </div>
 
     <div class="content">
         <div class="form-box">
-            <h2>Pesquisar Aluno</h2>
-            <form action="{{ route('app.aluno.listar')}}" method="post">
+            <h2>Pesquisa de Passivo</h2>
+            <form action="{{ route('app.passivo.listar')}}" method="post">
                 @csrf
                 <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome">
-                </div>
-                <div class="form-group">
-                    <label for="cod_sgde">Cod SGDE:</label>
-                    <input type="text" id="cod_sgde" name="cod_sgde">
-                </div>
-                <div class="form-group">
-                    <label for="data_nascimento">Data de Nascimento:</label>
-                    <input type="date" id="data_nascimento" name="data_nascimento">
+                    <label for="numero_pasta">Número da Pasta:</label>
+                    <input type="number" id="numero_pasta" name="numero_pasta">
                 </div>
                 <div class="form-group">
                     <button type="submit">Pesquisar</button>

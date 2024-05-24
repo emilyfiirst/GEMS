@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisar Aluno</title>
+    <title>Cadastro de Caixa de Passivo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,9 +25,9 @@
         }
 
         .menu {
-        background-color: #e6f3ff;
-        text-align: center;
-        padding: 10px;
+            background-color: #e6f3ff;
+            text-align: center;
+            padding: 10px;
         }
 
         .menu ul {
@@ -46,7 +46,6 @@
             color: #003366;
             font-weight: bold;
         }
-
         .content {
             flex-grow: 1;
             background-color: #f0f0f0;
@@ -112,29 +111,26 @@
 
     <div class="menu">
         <ul>
-            <li><a href="{{ route('app.aluno.cadastro') }}">Cadastrar</a></li>
+            <li><a href="{{ route('app.passivo') }}">Consultar</a></li>
         </ul>
     </div>
 
     <div class="content">
         <div class="form-box">
-            <h2>Pesquisar Aluno</h2>
-            <form action="{{ route('app.aluno.listar')}}" method="post">
+            <h2>{{ isset($passivo) ? 'Editar Passivo' : 'Cadastro de Passivo' }}</h2>
+            <form action="{{ route('app.passivo.cadastro')}}" method="post">
+                <input type="hidden" name="id" value="{{ $passivo->id ?? ''}}" >
                 @csrf
                 <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome">
+                    <label for="numero_caixa">Número da Caixa:</label>
+                    <input type="number" id="caixa" name="caixa" value="{{ $passivo->caixa ?? old('caixa') }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="cod_sgde">Cod SGDE:</label>
-                    <input type="text" id="cod_sgde" name="cod_sgde">
+                    <label for="numero_pasta">Número da Pasta:</label>
+                    <input type="number" id="pasta" name="pasta" value="{{ $passivo->pasta ?? old('pasta') }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="data_nascimento">Data de Nascimento:</label>
-                    <input type="date" id="data_nascimento" name="data_nascimento">
-                </div>
-                <div class="form-group">
-                    <button type="submit">Pesquisar</button>
+                    <button type="submit">{{ isset($passivo) ? 'Editar' : 'Cadastrar' }}</button>
                 </div>
             </form>
         </div>

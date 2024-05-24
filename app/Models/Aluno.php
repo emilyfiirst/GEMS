@@ -10,7 +10,7 @@ class Aluno extends Model
     
     //use HasFactory;
 
-    use SoftDeletes;
+    //use SoftDeletes;
 
     protected $table = 'alunos';
     protected $fillable = [

@@ -4,74 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Aluno</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh; 
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: #f8f9fa;
+    }
 
-        label {
-            font-weight: bold;
-            text-align: left;
-        }
+    header, footer {
+        background-color: #003366;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
 
-        .content, .menu {
-            background-color: #e6f3ff;
-            padding: 20px;
-            text-align: center;
-            flex-grow: 1; /* Faz com que a coluna de conteúdo ocupe o espaço restante */
-        }
-        .bold {
-            font-weight: bold;
-        }
-        .form-group {
-            margin-bottom: 10px;
-            width: 80%;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-        }
+    header h1, footer p {
+        margin: 0;
+    }
 
-        .form-group label {
-            flex: 1; 
-            max-width: 200px; 
-        }
+    .menu {
+        background-color: #e6f3ff;
+        text-align: center;
+        padding: 10px;
+    }
 
-        .form-group input[type="checkbox"] {
-            margin-left: 10px; 
-            flex: 0 0 auto;
-        }
+    .menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .form-group button {
-            width: 80%; 
-            margin: 0 auto; 
-            padding: 10px;
-            background-color: #003366;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px; 
-        }
-        .form-group button:hover {
-            background-color: #002244;
-        }
+    .menu li {
+        display: inline;
+        margin: 0 10px;
+    }
 
-        div button {
-            font-size: 17px;
-            font-weight: bold;
-        }
-    </style>
+    .menu a {
+        text-decoration: none;
+        color: #003366;
+        font-weight: bold;
+    }
+
+    .content {
+        flex-grow: 1;
+        background-color: #ffffff;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .form-box {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        max-width: 100%;
+        overflow-x: auto; /* Adicionado para permitir rolagem horizontal */
+    }
+
+    .form-box h2 {
+        margin-bottom: 20px;
+        color: #003366;
+    }
+
+    /* Estilos para a tabela */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+        background-color: #f8f9fa; /* Cor de fundo suave para células da tabela */
+    }
+
+    th {
+        background-color: #003366;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    /* Estilizando os botões */
+    .btn-excluir, .btn-editar a{
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-right: 5px;
+    }
+    
+
+    .btn-excluir {
+        background-color: #dc3545; /* Vermelho para o botão "Excluir" */
+    }
+
+    .btn-editar {
+        background-color: #28a745; /* Verde para o botão "Editar" */
+    }
+
+    .btn-excluir:hover, .btn-editar:hover {
+        background-color: #558cd9; /* Tom mais escuro de vermelho ou verde ao passar o mouse */
+    }
+
+    footer {
+        background-color: #003366;
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
+</style>
+
+
+
+
 </head>
 <body>
     
@@ -86,9 +146,49 @@
 
     <div class="content">
         <div class="form-box">
-            <h2>Consultar Alunos</h2>
+            <h2>Lista</h2>
             <form action="#" method="post">
-              ...lista...
+                 <table border=1 width=100%>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Codigo SGDE</th>
+                            <th>Data de Nascimento</th>
+                            <th>Ativo</th>
+                            <th>Numero da Pasta</th>
+                            <th>Certidão de nascimento</th>
+                            <th>Historico Escolar</th>
+                            <th>Cartão SUS</th>
+                            <th>Doc. Responsável</th>
+                            <th>Comp. Endereço</th>
+                            <th>Doador Medula</th>
+                            <th>Doador Sangue</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach($alunos as $aluno)
+                            <tr>
+                                <td>{{ $aluno->nome }}</td>
+                                <td>{{ $aluno->cod_sgde }}</td>
+                                <td>{{ $aluno->data_nascimento}}</td>
+                                <td>{{ $aluno->ativo ? 'Sim' : 'Não' }}</td>
+                                <td>{{ $aluno->numero_pasta }}</td>
+                                <td>{{ $aluno->certidao_nascimento ? 'Sim' : 'Não' }}</td>
+                                <td>{{ $aluno->historico ? 'Sim' : 'Não' }}</td>
+                                <td>{{ $aluno->cartao_sus ? 'Sim' : 'Não' }}</td>
+                                <td>{{ $aluno->doc_responsavel ? 'Sim' : 'Não' }}</td>
+                                <td>{{ $aluno->comp_endereco ? 'Sim' : 'Não' }}</td>
+                                <td>{{ $aluno->doador_medula ? 'Sim' : 'Não' }}</td>
+                                <td>{{ $aluno->doador_sangue ? 'Sim' : 'Não' }}</td>
+                                <td class="btn-excluir">Excluir</td>
+                                <td class="btn-editar"><a href="{{ route('app.aluno.editar', $aluno->id) }}">Editar</a></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
         </div>
     </div>
 

@@ -11,121 +11,184 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; 
+            min-height: 100vh;
         }
 
-        label {
-            font-weight: bold;
-            text-align: left;
-        }
-
-        .content, .menu {
-            background-color: #e6f3ff;
+        header, .menu, .content, footer {
             padding: 20px;
-            text-align: center;
-            flex-grow: 1; /* Faz com que a coluna de conteúdo ocupe o espaço restante */
         }
-        .bold {
+
+        header {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+        }
+
+        .menu {
+        background-color: #e6f3ff;
+        text-align: center;
+        padding: 10px;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #003366;
             font-weight: bold;
         }
+
+        .content {
+            flex-grow: 1;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        .form-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .form-box h2 {
+            margin-bottom: 20px;
+        }
+
         .form-group {
-            margin-bottom: 10px;
-            width: 80%;
-            margin: 0 auto;
+            margin-bottom: 20px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .form-group label {
-            flex: 1; 
-            max-width: 200px; 
+            font-weight: bold;
+            margin-bottom: 5px;
         }
 
-        .form-group input[type="checkbox"] {
-            margin-left: 10px; 
-            flex: 0 0 auto;
-        }
-
-        .form-group input {
+        .form-group input,
+        .form-group button {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-left: 10px;
+        }
+
         .form-group button {
-            width: 80%; 
-            margin: 0 auto; 
-            padding: 10px;
             background-color: #003366;
             color: white;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px; 
         }
+
         .form-group button:hover {
             background-color: #002244;
         }
 
-        div button {
-            font-size: 17px;
-            font-weight: bold;
+        .form-group .documentos label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px;
         }
     </style>
+    
 </head>
 <body>
-    
-    @include('app.layouts._partials.topo')
+    <header>
+        @include('app.layouts._partials.topo')
+    </header>
 
     <div class="menu">
         <ul>
-        <li><a href="{{ route('app.aluno') }}">Consultar</a></li>
+            <li><a href="{{ route('app.aluno') }}">Consultar</a></li>
         </ul>
     </div>
 
     <div class="content">
         <div class="form-box">
-            <h2>Cadastro de Aluno</h2>
-            <form action="{{ route('app.aluno.cadastro')}}" method="post">
+            <h2>{{ isset($aluno) ? 'Editar Aluno' : 'Cadastro de Aluno' }}</h2>
+            <form action="{{ route('app.aluno.cadastro') }}" method="post">
+                <input type="hidden" name="id" value="{{ $aluno->id ?? ''}}" >
                 @csrf
+                
                 <div class="form-group">
                     <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" >
+                    <input type="text" id="nome" name="nome" value="{{ $aluno->nome ?? old('nome') }}" required>
                 </div>
                 <div class="form-group">
                     <label for="cod_sgde">Cod SGDE:</label>
-                    <input type="text" id="cod_sgde" name="cod_sgde" >
+                    <input type="text" id="cod_sgde" name="cod_sgde" value="{{ $aluno->cod_sgde ?? old('cod_sgde') }}" required>
                 </div>
                 <div class="form-group">
                     <label for="data_nascimento">Data de Nascimento:</label>
-                    <input type="date" id="data_nascimento" name="data_nascimento" >
+                    <input type="date" id="data_nascimento" name="data_nascimento" value="{{ $aluno->data_nascimento ?? old('data_nascimento') }}" required>
                 </div>
                 <div class="form-group">
                     <label for="ativo">Ativo:</label>
-                    <input type="checkbox" id="ativo" name="ativo" value="1">
+                    <input type="hidden" name="ativo" value="0"> 
+                    <input type="checkbox" id="ativo" name="ativo" value="1" {{ old('ativo', $aluno->ativo ?? false) ? 'checked' : '' }} >
                 </div>
                 <div class="form-group">
                     <label for="numero_pasta">Número Pasta:</label>
-                    <input type="number" id="numero_pasta" name="numero_pasta" >
+                    <input type="number" id="numero_pasta" name="numero_pasta" value="{{ $aluno->numero_pasta ?? old('numero_pasta') }}" required>
+                </div>
+                <div class="form-group documentos">
+                    <label>Documentos:</label>
+                    <label>
+                    <input type="hidden" name="certidao_nascimento" value="0"> 
+                    <input type="checkbox" name="certidao_nascimento" value="1" {{ old('certidao_nascimento', $aluno->certidao_nascimento ?? false) ? 'checked' : '' }}> Certidão de Nascimento</label>
+                    <label>
+                    <input type="hidden" name="historico" value="0">
+                    <input type="checkbox" name="historico" value="1" {{ old('historico', $aluno->historico ?? false) ? 'checked' : '' }}> Histórico</label>
+                    <label>
+                    <input type="hidden" name="cartao_sus" value="0">
+                    <input type="checkbox" name="cartao_sus" value="1" {{ old('cartao_sus', $aluno->cartao_sus ?? false) ? 'checked' : '' }}> Cartão SUS</label>
+                    <label>
+                    <input type="hidden" name="doc_responsavel" value="0">
+                    <input type="checkbox" name="doc_responsavel" value="1" {{ old('doc_responsavel', $aluno->doc_responsavel ?? false) ? 'checked' : '' }}> Documento do Responsável</label>
+                    <label>
+                    <input type="hidden" name="comp_endereco" value="0">
+                    <input type="checkbox" name="comp_endereco" value="1" {{ old('comp_endereco', $aluno->comp_endereco ?? false) ? 'checked' : '' }}> Comprovante de Endereço</label>
+                    <label>
+                    <input type="hidden" name="doador_medula" value="0">
+                    <input type="checkbox" name="doador_medula" value="1" {{ old('doador_medula', $aluno->doador_medula ?? false) ? 'checked' : '' }}> Doador de Medula</label>
+                    <label>
+                    <input type="hidden" name="doador_sangue" value="0">
+                    <input type="checkbox" name="doador_sangue" value="1" {{ old('doador_sangue', $aluno->doador_sangue ?? false) ? 'checked' : '' }}> Doador de Sangue</label>
+
                 </div>
                 <div class="form-group">
-                    <label>Documentos:</label><br>
-                    <label><input type="checkbox" name="certidao_nascimento" value="1"> Certidão de Nascimento</label><br>
-                    <label><input type="checkbox" name="historico" value="1"> Histórico</label><br>
-                    <label><input type="checkbox" name="cartao_sus" value="1"> Cartão SUS</label><br>
-                    <label><input type="checkbox" name="doc_responsavel" value="1"> Documento do Responsável</label><br>
-                    <label><input type="checkbox" name="comp_endereco" value="1"> Comprovante de Endereço</label><br>
-                    <label><input type="checkbox" name="doador_medula" value="1"> Doador de Medula</label><br>
-                    <label><input type="checkbox" name="doador_sangue" value="1"> Doador de Sangue</label><br>
-                </div>
-   
-                <div class="form-group">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">{{ isset($aluno) ? 'Editar' : 'Cadastrar' }}</button>
                 </div>
             </form>
         </div>
     </div>
 
-    @include('app.layouts._partials.rodape')
+    <footer>
+        @include('app.layouts._partials.rodape')
+    </footer>
 </body>
 </html>
