@@ -122,8 +122,8 @@
             <form action="{{ route('app.passivo.listar')}}" method="post">
                 @csrf
                 <div class="form-group">
-                    <label for="numero_pasta">Número da Pasta:</label>
-                    <input type="number" id="numero_pasta" name="numero_pasta">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome">
                 </div>
                 <div class="form-group">
                     <button type="submit">Pesquisar</button>

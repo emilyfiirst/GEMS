@@ -13,8 +13,7 @@ class PassivoController extends Controller
     }
 
     public function listar(Request $request){
-        $passivos = Passivo::where('caixa', 'like', '%'.$request->input('caixa').'%')
-        ->where('pasta', 'like', '%'.$request->input('pasta').'%')
+        $passivos = Passivo::where('nome', 'like', '%'.$request->input('nome').'%')
         ->get();
 
         return view('app.passivo.listar', ['passivos' => $passivos]);
