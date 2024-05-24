@@ -122,6 +122,10 @@
                 <input type="hidden" name="id" value="{{ $passivo->id ?? ''}}" >
                 @csrf
                 <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text " id="nome" name="nome" value="{{ $passivo->nome ?? old('nome') }}" required>
+                </div>
+                <div class="form-group">
                     <label for="numero_caixa">Número da Caixa:</label>
                     <input type="number" id="caixa" name="caixa" value="{{ $passivo->caixa ?? old('caixa') }}" required>
                 </div>

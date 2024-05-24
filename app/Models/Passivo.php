@@ -16,6 +16,7 @@ class Passivo extends Model
     protected $fillable = [
         'caixa', 
         'pasta',
+        'nome',
     ];
 
     public $timestamps = false;

@@ -6,113 +6,132 @@
     <title>Cadastro de Aluno</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-        header, .menu, .content, footer {
-            padding: 20px;
-        }
+header, .menu, .content, footer {
+    padding: 20px;
+}
 
-        header {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-        }
+header {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+}
 
-        .menu {
-        background-color: #e6f3ff;
-        text-align: center;
-        padding: 10px;
-        }
+.menu {
+    background-color: #e6f3ff;
+    text-align: center;
+    padding: 10px;
+}
 
-        .menu ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
-        .menu li {
-            display: inline;
-            margin: 0 10px;
-        }
+.menu li {
+    display: inline;
+    margin: 0 10px;
+}
 
-        .menu a {
-            text-decoration: none;
-            color: #003366;
-            font-weight: bold;
-        }
+.menu a {
+    text-decoration: none;
+    color: #003366;
+    font-weight: bold;
+}
 
-        .content {
-            flex-grow: 1;
-            background-color: #f0f0f0;
-            text-align: center;
-        }
+.content {
+    flex-grow: 1;
+    background-color: #f0f0f0;
+    text-align: center;
+}
 
-        .form-box {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: 20px auto;
-        }
+.form-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 20px auto;
+}
 
-        .form-box h2 {
-            margin-bottom: 20px;
-        }
+.form-box h2 {
+    margin-bottom: 20px;
+}
 
-        .form-group {
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
-        .form-group label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
 
-        .form-group input,
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+.form-group input,
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
-        .form-group input[type="checkbox"] {
-            width: auto;
-            margin-left: 10px;
-        }
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-left: 10px;
+}
 
-        .form-group button {
-            background-color: #003366;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+.form-group button {
+    background-color: #003366;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
-        .form-group button:hover {
-            background-color: #002244;
-        }
+.form-group button:hover {
+    background-color: #002244;
+}
 
-        .form-group .documentos label {
-            display: block;
-            margin-bottom: 5px;
-        }
+.form-group .documentos label {
+    display: block;
+    margin-bottom: 5px;
+}
 
-        footer {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-            padding: 10px;
-        }
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Estilo para os radio buttons e rótulos */
+.form-group input[type="radio"] {
+    display: none;
+}
+
+/* Estilo para as etiquetas dos radio buttons */
+.form-group label {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Estilo para os radio buttons marcados */
+.form-group input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #003366;
+}
+
     </style>
     
 </head>
@@ -147,10 +166,13 @@
                     <input type="date" id="data_nascimento" name="data_nascimento" value="{{ $aluno->data_nascimento ?? old('data_nascimento') }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="ativo">Ativo:</label>
-                    <input type="hidden" name="ativo" value="0"> 
-                    <input type="checkbox" id="ativo" name="ativo" value="1" {{ old('ativo', $aluno->ativo ?? false) ? 'checked' : '' }} >
-                </div>
+    <label for="ativo">Status:</label>
+    <input type="radio" id="ativo" name="ativo" value="1" {{ (isset($aluno) && $aluno->ativo == 1) || old('ativo') == 1 ? 'checked' : '' }}>
+    <label for="ativo">Ativo</label>
+    <input type="radio" id="inativo" name="ativo" value="0" {{ (isset($aluno) && $aluno->ativo == 0) || old('ativo') == 0 ? 'checked' : '' }}>
+    <label for="inativo">Passivo</label>
+</div>
+
                 <div class="form-group">
                     <label for="numero_pasta">Número Pasta:</label>
                     <input type="number" id="numero_pasta" name="numero_pasta" value="{{ $aluno->numero_pasta ?? old('numero_pasta') }}" required>

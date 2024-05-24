@@ -154,7 +154,7 @@
                             <th>Nome</th>
                             <th>Codigo SGDE</th>
                             <th>Data de Nascimento</th>
-                            <th>Ativo</th>
+                            <th>Sistuação</th>
                             <th>Numero da Pasta</th>
                             <th>Certidão de nascimento</th>
                             <th>Historico Escolar</th>
@@ -174,7 +174,7 @@
                                 <td>{{ $aluno->nome }}</td>
                                 <td>{{ $aluno->cod_sgde }}</td>
                                 <td>{{ $aluno->data_nascimento}}</td>
-                                <td>{{ $aluno->ativo ? 'Sim' : 'Não' }}</td>
+                                <td>{{ $aluno->ativo ? 'Ativo' : 'Passivo' }}</td>
                                 <td>{{ $aluno->numero_pasta }}</td>
                                 <td>{{ $aluno->certidao_nascimento ? 'Sim' : 'Não' }}</td>
                                 <td>{{ $aluno->historico ? 'Sim' : 'Não' }}</td>

@@ -152,6 +152,7 @@
                         <tr>
                             <th>Caixa</th>
                             <th>Pasta</th>
+                            <th>Nome</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -162,6 +163,7 @@
                             <tr>
                                 <td>{{ $passivo->caixa }}</td>
                                 <td>{{ $passivo->pasta }}</td>
+                                <td>{{ $passivo->nome }}</td>
                                 <td class="btn-excluir">Excluir</td>
                                 <td class="btn-editar"><a href="{{ route('app.passivo.editar', $passivo->id) }}">Editar</a></td>
                             </tr>
