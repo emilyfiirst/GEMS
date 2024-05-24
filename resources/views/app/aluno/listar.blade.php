@@ -172,7 +172,7 @@
                         @foreach($alunos as $aluno)
                             <tr>
                                 <td>{{ $aluno->nome }}</td>
-                                <td>{{ $aluno->cod_sgde }}</td>
+                                <td>{{ $aluno->id }}</td>
                                 <td>{{ $aluno->data_nascimento}}</td>
                                 <td>{{ $aluno->ativo ? 'Ativo' : 'Passivo' }}</td>
                                 <td>{{ $aluno->numero_pasta }}</td>

@@ -157,10 +157,7 @@ footer {
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" value="{{ $aluno->nome ?? old('nome') }}" required>
                 </div>
-                <div class="form-group">
-                    <label for="cod_sgde">Cod SGDE:</label>
-                    <input type="text" id="cod_sgde" name="cod_sgde" value="{{ $aluno->cod_sgde ?? old('cod_sgde') }}" required>
-                </div>
+               
                 <div class="form-group">
                     <label for="data_nascimento">Data de Nascimento:</label>
                     <input type="date" id="data_nascimento" name="data_nascimento" value="{{ $aluno->data_nascimento ?? old('data_nascimento') }}" required>
