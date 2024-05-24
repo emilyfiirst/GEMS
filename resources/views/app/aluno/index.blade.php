@@ -97,6 +97,14 @@
             background-color: #002244;
         }
 
+         .excluido {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px; 
+            margin-bottom: 10px; 
+            border-radius: 5px; 
+        }
+
         footer {
             background-color: #003366;
             color: white;
@@ -109,6 +117,10 @@
     <header>
         @include('app.layouts._partials.topo')
     </header>
+
+    @if(session('success'))
+        <div class="excluido">Aluno excluido</div>
+    @endif
 
     <div class="menu">
         <ul>

@@ -14,7 +14,7 @@ class PassivoController extends Controller
 
     public function listar(Request $request){
         $passivos = Passivo::where('nome', 'like', '%'.$request->input('nome').'%')
-        ->get();
+        ->paginate(10);
 
         return view('app.passivo.listar', ['passivos' => $passivos]);
     }
@@ -47,7 +47,13 @@ class PassivoController extends Controller
 
         $passivo = Passivo::find($id);
         
-
         return view('app.passivo.cadastro', ['passivo' => $passivo]);
+    }
+
+    public function excluir($id){
+        $passivo = Passivo::find($id);
+        $alunoNome = $passivo->nome;
+        $passivo->delete();
+        return redirect()->route('app.passivo')->with('success', "O passivo $alunoNome foi excluído com sucesso.");
     }
 }

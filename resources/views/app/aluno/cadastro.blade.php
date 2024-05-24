@@ -163,12 +163,12 @@ footer {
                     <input type="date" id="data_nascimento" name="data_nascimento" value="{{ $aluno->data_nascimento ?? old('data_nascimento') }}" required>
                 </div>
                 <div class="form-group">
-    <label for="ativo">Status:</label>
-    <input type="radio" id="ativo" name="ativo" value="1" {{ (isset($aluno) && $aluno->ativo == 1) || old('ativo') == 1 ? 'checked' : '' }}>
-    <label for="ativo">Ativo</label>
-    <input type="radio" id="inativo" name="ativo" value="0" {{ (isset($aluno) && $aluno->ativo == 0) || old('ativo') == 0 ? 'checked' : '' }}>
-    <label for="inativo">Passivo</label>
-</div>
+                    <label for="ativo">Status:</label>
+                    <input type="radio" id="ativo" name="ativo" value="1" {{ (isset($aluno) && $aluno->ativo == 1) || old('ativo') == 1 ? 'checked' : '' }}>
+                    <label for="ativo">Ativo</label>
+                    <input type="radio" id="inativo" name="ativo" value="0" {{ (isset($aluno) && $aluno->ativo == 0) || old('ativo') == 0 ? 'checked' : '' }}>
+                    <label for="inativo">Passivo</label>
+                </div>
 
                 <div class="form-group">
                     <label for="numero_pasta">Número Pasta:</label>

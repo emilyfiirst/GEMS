@@ -24,7 +24,7 @@ class AlunosController extends Controller
         ->where('comp_endereco', 'like', '%'.$request->input('comp_endereco').'%')
         ->where('doador_medula', 'like', '%'.$request->input('doador_medula').'%')
         ->where('doador_sangue', 'like', '%'.$request->input('doador_sangue').'%')
-        ->get();
+        ->paginate(10);
 
         return view('app.aluno.listar', ['alunos' => $alunos]);
     }
@@ -63,5 +63,12 @@ class AlunosController extends Controller
         
 
         return view('app.aluno.cadastro', ['aluno' => $aluno]);
+    }
+
+    public function excluir($id){
+        $aluno = Aluno::find($id);
+        $alunoNome = $aluno->nome;
+        $aluno->delete();
+        return redirect()->route('app.aluno')->with('success', "O aluno $alunoNome foi excluído com sucesso.");
     }
 }

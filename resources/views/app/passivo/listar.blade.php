@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Aluno</title>
+    <title>Cadastro de Passivo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,8 +55,8 @@
             text-align: center;
             padding: 20px;
             display: flex;
-            justify-content: center; /* Centraliza horizontalmente */
-            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; 
+            align-items: center; 
         }
 
         .form-box {
@@ -65,7 +65,7 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             max-width: 50%;
-            overflow-x: auto; /* Adicionado para permitir rolagem horizontal */
+            overflow-x: auto; 
             margin: 0 auto;
         }
 
@@ -74,7 +74,6 @@
             color: #003366;
         }
 
-        /* Estilos para a tabela */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -84,7 +83,7 @@
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ccc;
-            background-color: #f8f9fa; /* Cor de fundo suave para células da tabela */
+            background-color: #f8f9fa; 
         }
 
         th {
@@ -100,28 +99,30 @@
             background-color: #ddd;
         }
 
-        /* Estilizando os botões */
-        .btn-excluir, .btn-editar a {
+        .btn-excluir, .btn-editar {
             padding: 8px 16px;
             border: none;
             border-radius: 5px;
-            color: white;
             cursor: pointer;
-            text-decoration: none;
             transition: background-color 0.3s ease;
             margin-right: 5px;
         }
 
+        .btn-excluir a, .btn-editar a{
+            text-decoration: none;
+            color: white;
+        }
+
         .btn-excluir {
-            background-color: #dc3545; /* Vermelho para o botão "Excluir" */
+            background-color: #dc3545;
         }
 
         .btn-editar {
-            background-color: #28a745; /* Verde para o botão "Editar" */
+            background-color: #28a745; 
         }
 
         .btn-excluir:hover, .btn-editar:hover {
-            background-color: #558cd9; /* Tom mais escuro de vermelho ou verde ao passar o mouse */
+            background-color: #558cd9; 
         }
 
         footer {
@@ -130,7 +131,45 @@
             text-align: center;
             padding: 10px;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+
+        .pagination a, .pagination span {
+            color: #003366;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+            border-radius: 5px;
+        }
+
+        .pagination a.active, .pagination span.current {
+            background-color: #003366;
+            color: white;
+            border: 1px solid #003366;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        .pagination svg {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        .pagination .hidden {
+            display: none;
+        }
     </style>
+
+
 </head>
 <body>
     
@@ -164,12 +203,15 @@
                                 <td>{{ $passivo->caixa }}</td>
                                 <td>{{ $passivo->pasta }}</td>
                                 <td>{{ $passivo->nome }}</td>
-                                <td class="btn-excluir">Excluir</td>
+                                <td class="btn-excluir"><a href="{{ route('app.passivo.excluir', $passivo->id) }}">Excluir</a></td>
                                 <td class="btn-editar"><a href="{{ route('app.passivo.editar', $passivo->id) }}">Editar</a></td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <div class="pagination">
+                    {{ $passivos->links() }}
+                </div>
             </form>
         </div>
     </div>
