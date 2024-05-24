@@ -129,7 +129,7 @@ footer {
 /* Estilo para os radio buttons marcados */
 .form-group input[type="radio"]:checked + label {
     font-weight: bold;
-    color: #003366;
+    color: #FF0000; /* cor vermelha */
 }
 
     </style>
