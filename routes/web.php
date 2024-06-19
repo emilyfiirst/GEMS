@@ -35,6 +35,7 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     Route::post('/aluno/editar/{id}', [AlunosController::class, 'editar'])->name('app.aluno.editar');
     Route::put('/aluno/editar/{id}', [AlunosController::class, 'editar'])->name('app.aluno.editar');
     Route::get('/aluno/excluir/{id}', [AlunosController::class, 'excluir'])->name('app.aluno.excluir');
+    Route::get('/app/aluno/excluir/{id}', [AlunosController::class, 'excluir'])->name('app.aluno.excluir');
 
 
 

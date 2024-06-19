@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Aluno extends Model
 {
     
-    //use HasFactory;
-
-    //use SoftDeletes;
+    use SoftDeletes;
 
     protected $table = 'alunos';
     protected $fillable = [
@@ -24,8 +22,12 @@ class Aluno extends Model
         'doc_responsavel', 
         'comp_endereco',
         'doador_medula', 
-        'doador_sangue'
+        'doador_sangue',
+        'deleted_by',
     ];
+
+
+    protected $dates = ['deleted_at'];
 
     public $timestamps = false;
 }

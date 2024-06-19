@@ -65,10 +65,24 @@ class AlunosController extends Controller
         return view('app.aluno.cadastro', ['aluno' => $aluno]);
     }
 
-    public function excluir($id){
+    public function excluir($id)
+    {
         $aluno = Aluno::find($id);
         $alunoNome = $aluno->nome;
+
+        //$userId = auth()->user()->id;
+
+
+        //$aluno->deleted_by = $userId;
+
+        
+        $aluno->save();
+
+        
         $aluno->delete();
+
         return redirect()->route('app.aluno')->with('success', "O aluno $alunoNome foi excluído com sucesso.");
     }
+
+    
 }

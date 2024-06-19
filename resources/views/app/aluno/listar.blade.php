@@ -249,6 +249,7 @@
         </div>
     </div>
 
+
     @include('app.layouts._partials.rodape')
 
 </body>
