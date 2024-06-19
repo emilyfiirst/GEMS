@@ -44,13 +44,19 @@ class AlunosController extends Controller
             ];
     
             $request->validate($regras, $feedback);
+
+                
+            $data = $request->all();
+            $data['ativo'] = $request->has('ativo') ? 1 : 0;
+            $data['passivo'] = $request->has('passivo') ? 1 : 0;
+
     
             if ($request->filled('id')) {
                 $aluno = Aluno::find($request->input('id'));
-                $update = $aluno->update($request->all());
+                $update = $aluno->update($data);
             } else {
                 $aluno = new Aluno();
-                $aluno->create($request->all());
+                $aluno->create($data);
             }
         }
     

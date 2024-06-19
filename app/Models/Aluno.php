@@ -15,6 +15,7 @@ class Aluno extends Model
         'nome',
         'data_nascimento',
         'ativo',
+        'passivo',     
         'numero_pasta',
         'certidao_nascimento',
         'historico',

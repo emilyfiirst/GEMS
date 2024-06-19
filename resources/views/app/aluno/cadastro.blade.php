@@ -91,6 +91,20 @@ header {
     margin-left: 10px;
 }
 
+.checkbox-group{
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input[type="checkbox"]{
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+.checkbox-group label{
+    margin-right: 10px;
+}
+
 .form-group button {
     background-color: #003366;
     color: white;
@@ -162,12 +176,17 @@ footer {
                     <label for="data_nascimento">Data de Nascimento:</label>
                     <input type="date" id="data_nascimento" name="data_nascimento" value="{{ $aluno->data_nascimento ?? old('data_nascimento') }}" required>
                 </div>
-                <div class="form-group">
-                    <label for="ativo">Status:</label>
-                    <input type="radio" id="ativo" name="ativo" value="1" {{ (isset($aluno) && $aluno->ativo == 1) || old('ativo') == 1 ? 'checked' : '' }}>
-                    <label for="ativo">Ativo</label>
-                    <input type="radio" id="inativo" name="ativo" value="0" {{ (isset($aluno) && $aluno->ativo == 0) || old('ativo') == 0 ? 'checked' : '' }}>
-                    <label for="inativo">Passivo</label>
+                <div class="form-group">  
+                    <label for="ativo">Situação do Estudante:</label>
+                    <div class="checkbox-group">
+                        <input type="hidden" name="ativo" value="0">
+                        <input type="checkbox" id="ativo" name="ativo" value="1" {{ (isset($aluno) && $aluno->ativo == 1) || old('ativo') == 1 ? 'checked' : '' }}>
+                        <label for="ativo">Ativo</label>
+
+                        <input type="hidden" name="passivo" value="o">
+                        <input type="checkbox" id="passivo" name="passivo" value="1" {{ (isset($aluno) && $aluno->passivo == 1) || old('passivo') == 1 ? 'checked' : '' }}> 
+                        <label for="inativo">Passivo</label>
+                    </div>    
                 </div>
 
                 <div class="form-group">
