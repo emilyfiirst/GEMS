@@ -176,23 +176,19 @@ footer {
                     <label for="data_nascimento">Data de Nascimento:</label>
                     <input type="date" id="data_nascimento" name="data_nascimento" value="{{ $aluno->data_nascimento ?? old('data_nascimento') }}" required>
                 </div>
-                <div class="form-group">  
-                    <label for="ativo">Situação do Estudante:</label>
-                    <div class="checkbox-group">
-                        <input type="hidden" name="ativo" value="0">
-                        <input type="checkbox" id="ativo" name="ativo" value="1" {{ (isset($aluno) && $aluno->ativo == 1) || old('ativo') == 1 ? 'checked' : '' }}>
-                        <label for="ativo">Ativo</label>
+               <div class="radio-group">
+                    <label>
+                        
+                        <input type="radio" name="ativo" value="1" {{ (isset($aluno) && $aluno->ativo == 1) || old('ativo') == 1 ? 'checked' : '' }}>
+                        Ativo
+                    </label>
+                    <label>
+                        
+                        <input type="radio" name="ativo" value="0" {{ (isset($aluno) && $aluno->ativo == 0) || old('ativo') === '0' ? 'checked' : '' }}>
+                        Passivo
+                    </label>
+                </div>    
 
-                        <input type="hidden" name="passivo" value="o">
-                        <input type="checkbox" id="passivo" name="passivo" value="1" {{ (isset($aluno) && $aluno->passivo == 1) || old('passivo') == 1 ? 'checked' : '' }}> 
-                        <label for="inativo">Passivo</label>
-                    </div>    
-                </div>
-
-                <div class="form-group">
-                    <label for="numero_pasta">Número Pasta:</label>
-                    <input type="number" id="numero_pasta" name="numero_pasta" value="{{ $aluno->numero_pasta ?? old('numero_pasta') }}" required>
-                </div>
                 <div class="form-group documentos">
                     <label>Documentos:</label>
                     <label>

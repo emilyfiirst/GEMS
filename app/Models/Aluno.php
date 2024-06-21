@@ -16,7 +16,6 @@ class Aluno extends Model
         'data_nascimento',
         'ativo',
         'passivo',     
-        'numero_pasta',
         'certidao_nascimento',
         'historico',
         'cartao_sus',
@@ -25,10 +24,12 @@ class Aluno extends Model
         'doador_medula', 
         'doador_sangue',
         'deleted_by',
+        'motivo_exclusao',
     ];
 
 
     protected $dates = ['deleted_at'];
+    
 
     public $timestamps = false;
 }

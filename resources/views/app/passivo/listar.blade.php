@@ -202,7 +202,11 @@
                             <tr>
                                 <td>{{ $passivo->caixa }}</td>
                                 <td>{{ $passivo->pasta }}</td>
-                                <td>{{ $passivo->nome }}</td>
+                                @foreach($alunos as $aluno)
+                                    @if($aluno->id == $passivo->nome)
+                                        <td>{{ $aluno->nome }}</td>
+                                    @endif
+                                @endforeach
                                 <td class="btn-excluir"><a href="{{ route('app.passivo.excluir', $passivo->id) }}">Excluir</a></td>
                                 <td class="btn-editar"><a href="{{ route('app.passivo.editar', $passivo->id) }}">Editar</a></td>
                             </tr>

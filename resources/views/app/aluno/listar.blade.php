@@ -186,6 +186,14 @@
         .closebtn:hover {
             color: black;
         }
+
+        .form-excluir {
+            display: none;
+        }
+
+        .btn-excluir input[type="checkbox"]:checked ~ .form-excluir {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -201,54 +209,62 @@
     <div class="content">
         <div class="form-box">
             <h2>Lista</h2>
-            <form action="#" method="post">
-                <table border=1 width=100%>
-                    <thead>
+            <table border=1 width=100%>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Codigo SGDE</th>
+                        <th>Data de Nascimento</th>
+                        <th>Situação</th>
+                        <th>Certidão de nascimento</th>
+                        <th>Historico Escolar</th>
+                        <th>Cartão SUS</th>
+                        <th>Doc. Responsável</th>
+                        <th>Comp. Endereço</th>
+                        <th>Doador Medula</th>
+                        <th>Doador Sangue</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($alunos as $aluno)
                         <tr>
-                            <th>Nome</th>
-                            <th>Codigo SGDE</th>
-                            <th>Data de Nascimento</th>
-                            <th>Situação</th>
-                            <th>Numero da Pasta</th>
-                            <th>Certidão de nascimento</th>
-                            <th>Historico Escolar</th>
-                            <th>Cartão SUS</th>
-                            <th>Doc. Responsável</th>
-                            <th>Comp. Endereço</th>
-                            <th>Doador Medula</th>
-                            <th>Doador Sangue</th>
-                            <th></th>
-                            <th></th>
+                            <td>{{ $aluno->nome }}</td>
+                            <td>{{ $aluno->id }}</td>
+                            <td>{{ $aluno->data_nascimento }}</td>
+                            <td>{{ $aluno->ativo ? 'Ativo' : 'Passivo' }}</td>
+                            <td>{{ $aluno->certidao_nascimento ? 'Sim' : 'Não' }}</td>
+                            <td>{{ $aluno->historico ? 'Sim' : 'Não' }}</td>
+                            <td>{{ $aluno->cartao_sus ? 'Sim' : 'Não' }}</td>
+                            <td>{{ $aluno->doc_responsavel ? 'Sim' : 'Não' }}</td>
+                            <td>{{ $aluno->comp_endereco ? 'Sim' : 'Não' }}</td>
+                            <td>{{ $aluno->doador_medula ? 'Sim' : 'Não' }}</td>
+                            <td>{{ $aluno->doador_sangue ? 'Sim' : 'Não' }}</td>
+                            <td class="btn-excluir">
+                                <label>
+                                    <input type="checkbox" style="display:none;">
+                                    Excluir
+                                    <div class="form-excluir">
+                                        <form id="form_exclusao_{{ $aluno->id }}" action="{{ route('app.aluno.excluir', $aluno->id) }}" method="get">
+                                            @csrf
+                                            <input type="hidden" name="motivo_exclusao" id="motivo_exclusao">
+                                            <input type="text" name="motivo_exclusao" placeholder="Informe o motivo da exclusão">
+                                            <button type="submit">Confirmar</button>
+                                        </form>
+                                    </div>
+                                </label>
+                            </td>
+                            <td class="btn-editar"><a href="{{ route('app.aluno.editar', $aluno->id) }}">Editar</a></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($alunos as $aluno)
-                            <tr>
-                                <td>{{ $aluno->nome }}</td>
-                                <td>{{ $aluno->id }}</td>
-                                <td>{{ $aluno->data_nascimento }}</td>
-                                <td>{{ $aluno->ativo ? 'Ativo' : 'Passivo' }}</td>
-                                <td>{{ $aluno->numero_pasta }}</td>
-                                <td>{{ $aluno->certidao_nascimento ? 'Sim' : 'Não' }}</td>
-                                <td>{{ $aluno->historico ? 'Sim' : 'Não' }}</td>
-                                <td>{{ $aluno->cartao_sus ? 'Sim' : 'Não' }}</td>
-                                <td>{{ $aluno->doc_responsavel ? 'Sim' : 'Não' }}</td>
-                                <td>{{ $aluno->comp_endereco ? 'Sim' : 'Não' }}</td>
-                                <td>{{ $aluno->doador_medula ? 'Sim' : 'Não' }}</td>
-                                <td>{{ $aluno->doador_sangue ? 'Sim' : 'Não' }}</td>
-                                <td class="btn-excluir"><a href="{{ route('app.aluno.excluir', $aluno->id) }}">Excluir</a></td>
-                                <td class="btn-editar"><a href="{{ route('app.aluno.editar', $aluno->id) }}">Editar</a></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="pagination">
-                    {{ $alunos->links() }}
-                </div>
-            </form>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="pagination">
+                {{ $alunos->links() }}
+            </div>
         </div>
     </div>
-
 
     @include('app.layouts._partials.rodape')
 

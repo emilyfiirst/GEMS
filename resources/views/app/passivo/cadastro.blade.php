@@ -78,6 +78,7 @@
         }
 
         .form-group input,
+        .form-group select,
         .form-group button {
             width: 100%;
             padding: 10px;
@@ -122,9 +123,23 @@
                 <input type="hidden" name="id" value="{{ $passivo->id ?? ''}}" >
                 @csrf
                 <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text " id="nome" name="nome" value="{{ $passivo->nome ?? old('nome') }}" required>
-                </div>
+                <label for="aluno_id">Selecione ou digite o Aluno:</label>
+                <input list="alunos" id="nome" name="nome" value="{{ $passivo->nome ?? old('nome') }}" pattern=".*\d.*" required autocomplete="off">
+                
+              
+                <datalist id="alunos">
+                    @foreach ($alunos ?? [] as $aluno)
+                        @if ($aluno->ativo == "passivo")
+                            <option value="{{ $aluno->id }} {{ $aluno->nome }}" data-aluno-id="{{ $aluno->id }}"></option>
+                            
+                        @endif
+                    @endforeach
+                </datalist>
+
+
+            </div>
+
+            
                 <div class="form-group">
                     <label for="numero_caixa">Número da Caixa:</label>
                     <input type="number" id="caixa" name="caixa" value="{{ $passivo->caixa ?? old('caixa') }}" required>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Passivo; 
+use App\Models\Aluno; 
 
 
 class PassivoController extends Controller
@@ -13,13 +14,17 @@ class PassivoController extends Controller
     }
 
     public function listar(Request $request){
+        $alunos = Aluno::all(); 
         $passivos = Passivo::where('nome', 'like', '%'.$request->input('nome').'%')
         ->paginate(10);
 
-        return view('app.passivo.listar', ['passivos' => $passivos]);
+        return view('app.passivo.listar', ['passivos' => $passivos, 'alunos' => $alunos]);
     }
 
     public function cadastrar(Request $request){
+        $alunos = Aluno::all();
+
+       
         if($request->input('_token') != ''){
            $regras = [
            ];
@@ -40,14 +45,16 @@ class PassivoController extends Controller
             $passivo->create($request->all());
         }
         }
-        return view('app.passivo.cadastro');
+        return view('app.passivo.cadastro', ['alunos' => $alunos,]);
+        //return view('app.passivo.cadastro');
     }
 
     public function editar($id){
 
         $passivo = Passivo::find($id);
+        $alunos = Aluno::all();
         
-        return view('app.passivo.cadastro', ['passivo' => $passivo]);
+        return view('app.passivo.cadastro', ['passivo' => $passivo, 'alunos' => $alunos]);
     }
 
     public function excluir($id){

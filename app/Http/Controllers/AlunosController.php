@@ -16,7 +16,6 @@ class AlunosController extends Controller
         ->where('id', 'like', '%'.$request->input('id').'%')
         ->where('data_nascimento', 'like', '%'.$request->input('data_nascimento').'%')
         ->where('ativo', 'like', '%'.$request->input('ativo').'%')
-        ->where('numero_pasta', 'like', '%'.$request->input('numero_pasta').'%')
         ->where('certidao_nascimento', 'like', '%'.$request->input('certidao_nascimento').'%')
         ->where('historico', 'like', '%'.$request->input('historico').'%')
         ->where('cartao_sus', 'like', '%'.$request->input('cartao_sus').'%')
@@ -34,7 +33,6 @@ class AlunosController extends Controller
             $regras = [
                 'nome' => 'required|min:3|max:100',
                 'data_nascimento' => 'required',
-                'numero_pasta' => 'required',
             ];
     
             $feedback = [
@@ -47,8 +45,7 @@ class AlunosController extends Controller
 
                 
             $data = $request->all();
-            $data['ativo'] = $request->has('ativo') ? 1 : 0;
-            $data['passivo'] = $request->has('passivo') ? 1 : 0;
+            
 
     
             if ($request->filled('id')) {
@@ -59,6 +56,7 @@ class AlunosController extends Controller
                 $aluno->create($data);
             }
         }
+        
     
         return view('app.aluno.cadastro');
     }
@@ -67,11 +65,12 @@ class AlunosController extends Controller
 
         $aluno = Aluno::find($id);
         
+        
 
         return view('app.aluno.cadastro', ['aluno' => $aluno]);
     }
 
-    public function excluir($id)
+    public function excluir(Request $request, $id)
     {
         $aluno = Aluno::find($id);
         $alunoNome = $aluno->nome;
@@ -80,6 +79,12 @@ class AlunosController extends Controller
 
 
         //$aluno->deleted_by = $userId;
+
+        $motivo = $request->input('motivo_exclusao');
+        $aluno->motivo_exclusao = $motivo;
+        $aluno->save();
+
+        $aluno->delete();
 
         
         $aluno->save();
